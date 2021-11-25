@@ -25,8 +25,8 @@ function createTodoListItem(formInputParam) {
     
     //Get the ul from html in todo section
     const ulEl = document.querySelector('.todo-list')
-    const formEl = document.querySelector('.add-item')
-    const valueInput = document.getElementsByClassName("text-input").value
+    // const formEl = document.querySelector('.add-item')
+    // const valueInput = document.getElementsByClassName("text-input").value
     
     //create li for todo
     const liEl = document.createElement('li')
@@ -73,9 +73,18 @@ function createTodoListItem(formInputParam) {
     ulEl.append(liEl)
 
     // sectionEl.append(ulEl)
+
+    inputEl.addEventListener('click', function (event) {
+
+        if (inputEl.checked === true) {
+            createTodoListItemCompleted(formInputParam)
+            ulEl.innerHTML = ''
+        }
+
+    })
 }
 
-function createTodoListItemCompleted() {
+function createTodoListItemCompleted(formInputParam) {
 
     // const sectionEl = document.querySelector('.completed-section')
 
@@ -103,7 +112,7 @@ function createTodoListItemCompleted() {
     //create an p
     const pEl = document.createElement('p')
     pEl.setAttribute('class', 'text')
-    pEl.textContent = 'Go shopping'
+    pEl.textContent = formInputParam
     divEl2.append(pEl)
 
     //create another div
@@ -127,6 +136,15 @@ function createTodoListItemCompleted() {
     ulEl.append(liEl)
 
     // sectionEl.append(ulEl)
+
+    inputEl.addEventListener('click', function (event) {
+
+        if (inputEl.checked === true) {
+            createTodoListItem(formInputParam)
+            ulEl.innerHTML = ''
+        }
+
+    })
 }
 
 function  displayTodoListItem() {
@@ -162,5 +180,5 @@ function removeCompletedSection() {
 }
 
 displayTodoListItem()
-createTodoListItemCompleted()
+// createTodoListItemCompleted()
 removeCompletedSection()

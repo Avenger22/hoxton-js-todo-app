@@ -78,10 +78,10 @@ ul {
   place-content: center;
 }
 
-section.completed-section {
+/* section.completed-section {
   display: grid;
   grid-template-rows: 0.2fr 0.8fr;
-}
+} */
 
 .todo.completed {
   display: grid;

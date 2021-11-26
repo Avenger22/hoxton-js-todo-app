@@ -4,22 +4,11 @@
 // 3. update the state
 // 4. rerender the app based on the new state
 
-const state = {
-
-    todoInput : '',
-    showCompleted: true,
-
-    todos: [
-    {
-        text: 'Go shopping',
-        completed: false
-    },
-    //etc other objects inside array
-    ]
-
+let state = {
+    inputContent: []
 }
 
-function createTodoListItem(formInputParam) {
+function renderTodoListItem(stateInputParam) {
 
     // const sectionEl = document.querySelector('.todo-section')
     
@@ -40,6 +29,7 @@ function createTodoListItem(formInputParam) {
     const inputEl = document.createElement('input')
     inputEl.setAttribute('class', 'completed-checkbox')
     inputEl.setAttribute('type', 'checkbox')
+    // stateCheckBoxParam = inputEl.checked
     divEl1.append(inputEl)
 
     //create another div
@@ -49,7 +39,7 @@ function createTodoListItem(formInputParam) {
     //create an p
     const pEl = document.createElement('p')
     pEl.setAttribute('class', 'text')
-    pEl.textContent = formInputParam
+    pEl.textContent = stateInputParam[stateInputParam.length - 1]
     divEl2.append(pEl)
 
     //create another div
@@ -74,17 +64,27 @@ function createTodoListItem(formInputParam) {
 
     // sectionEl.append(ulEl)
 
+    // btnEl1.addEventListener('click', function (event) {
+
+    // })
+
+    //event for second button delete
+    btnEl2.addEventListener('click', function (event) {
+        liEl.remove()
+    })
+
+    //event for checkbox if is clicked
     inputEl.addEventListener('click', function (event) {
 
         if (inputEl.checked === true) {
-            createTodoListItemCompleted(formInputParam)
-            ulEl.innerHTML = ''
+            renderTodoListItemCompleted(stateInputParam)
+            liEl.remove()
         }
 
     })
 }
 
-function createTodoListItemCompleted(formInputParam) {
+function renderTodoListItemCompleted(stateInputParam) {
 
     // const sectionEl = document.querySelector('.completed-section')
 
@@ -103,6 +103,7 @@ function createTodoListItemCompleted(formInputParam) {
     const inputEl = document.createElement('input')
     inputEl.setAttribute('class', 'completed-checkbox')
     inputEl.setAttribute('type', 'checkbox')
+    // stateCheckBoxParam = inputEl.checked
     divEl1.append(inputEl)
 
     //create another div
@@ -112,7 +113,7 @@ function createTodoListItemCompleted(formInputParam) {
     //create an p
     const pEl = document.createElement('p')
     pEl.setAttribute('class', 'text')
-    pEl.textContent = formInputParam
+    pEl.textContent = stateInputParam[stateInputParam.length - 1]
     divEl2.append(pEl)
 
     //create another div
@@ -137,28 +138,44 @@ function createTodoListItemCompleted(formInputParam) {
 
     // sectionEl.append(ulEl)
 
+    // btnEl1.addEventListener('click', function (event) {
+
+    // })
+
+    //event for second button delete
+    btnEl2.addEventListener('click', function (event) {
+        liEl.remove()
+    })
+
     inputEl.addEventListener('click', function (event) {
 
         if (inputEl.checked === true) {
-            createTodoListItem(formInputParam)
-            ulEl.innerHTML = ''
+            renderTodoListItem(stateInputParam)
+            liEl.remove()
         }
 
     })
 }
 
-function  displayTodoListItem() {
+function  renderDisplayTodoListItem() {
     //Get the form value
     const formEl = document.querySelector('.add-item')
 
     //events for the form this has a subevent
     formEl.addEventListener('submit', function (event) {
+        
         const inputEl = document.querySelector('.text-input')
-        let formInput = inputEl.value
+       
+        state.inputContent.push(inputEl.value)
 
         event.preventDefault()
-        createTodoListItem(formInput)
+        renderTodoListItem(state.inputContent)
+        
     })
+}
+
+function render() {
+    renderDisplayTodoListItem()
 }
 
 function removeCompletedSection() {
@@ -172,13 +189,12 @@ function removeCompletedSection() {
             }
 
             else {
-                createTodoListItemCompleted()
+                renderTodoListItemCompleted()
             }
 
         })
 
 }
 
-displayTodoListItem()
-// createTodoListItemCompleted()
+render()
 removeCompletedSection()

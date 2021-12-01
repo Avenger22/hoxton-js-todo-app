@@ -182,13 +182,14 @@ function removeCompletedSection() {
     const checkboxInput = document.querySelector(".show-completed-checkbox")
 
         checkboxInput.addEventListener('click', function (event) {
+            const completedList = document.querySelector('section .completed-list')
 
             if (checkboxInput.checked === false) {
-                const completedList = document.querySelector('.completed-list')
-                completedList.innerHTML = ''
+                completedList.style.display = 'none'
             }
 
             else {
+                completedList.style.display = 'block'
                 renderTodoListItemCompleted()
             }
 
